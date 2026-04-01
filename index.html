@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dwell — Join the Waitlist</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page:   #f7f4ee;
+  --paper:  #f0ece0;
+  --paper2: #e8e2d4;
+  --paper3: #ddd8ca;
+  --sand:   #c8b8a1;
+  --ink:    #1e1a14;
+  --ink2:   #3d3628;
+  --ink3:   #7a6e5a;
+  --green:  #2e5c3e;
+  --border: rgba(30,26,20,0.10);
+  --rule:   rgba(30,26,20,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  opacity: .35; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(247,244,238,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-wordmark {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.nav-wordmark em { color: var(--green); font-style: italic; }
+
+.nav-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 14px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 120px 48px 80px;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-left {
+  animation: fadeUp 1s ease both;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 32px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: block; width: 28px; height: 1px;
+  background: var(--sand);
+}
+
+.hero-city-tag {
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px 10px;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: var(--ink3);
+  text-transform: uppercase;
+  background: var(--paper);
+  animation: fadeIn 1.4s ease both;
+}
+
+h1 {
+  font-family: 'Spectral', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(48px, 5.5vw, 76px);
+  line-height: 0.96;
+  letter-spacing: -2px;
+  color: var(--ink);
+  margin-bottom: 28px;
+  animation: fadeUp 1s 0.1s ease both;
+}
+
+h1 em {
+  color: var(--green);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink2);
+  max-width: 420px;
+  margin-bottom: 40px;
+  animation: fadeUp 1s 0.2s ease both;
+}
+
+.hero-stats {
+  display: flex; gap: 32px; margin-bottom: 48px;
+  animation: fadeUp 1s 0.3s ease both;
+}
+
+.stat {
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.stat-num {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 28px;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink3);
+}
+
+.stat-divider {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+
+/* ── CTA ── */
+.cta-group {
+  display: flex; flex-direction: column; gap: 12px;
+  animation: fadeUp 1s 0.4s ease both;
+}
+
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--ink);
+  color: var(--page);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: 4px;
+  width: fit-content;
+  transition: background 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--green);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.cta-btn:hover::after { transform: translateX(0); }
+.cta-btn:hover { transform: translateY(-1px); }
+.cta-btn span { position: relative; z-index: 1; }
+
+.cta-btn .arrow {
+  position: relative; z-index: 1;
+  transition: transform 0.2s;
+}
+.cta-btn:hover .arrow { transform: translateX(3px); }
+
+.cta-note {
+  font-size: 9px; letter-spacing: 0.5px;
+  color: var(--ink3);
+  padding-left: 2px;
+}
+
+/* ── HERO RIGHT (phone mockup) ── */
+.hero-right {
+  display: flex; justify-content: center; align-items: center;
+  animation: fadeIn 1.2s 0.3s ease both;
+  position: relative;
+}
+
+.phone-frame {
+  width: 280px;
+  background: var(--ink);
+  border-radius: 40px;
+  padding: 14px;
+  box-shadow: 0 40px 80px rgba(30,26,20,0.25), 0 0 0 1px rgba(30,26,20,0.3);
+  position: relative;
+}
+
+.phone-screen {
+  background: var(--paper);
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 9/19;
+  position: relative;
+}
+
+.phone-notch {
+  width: 80px; height: 26px;
+  background: var(--ink);
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+  position: relative; z-index: 2;
+}
+
+.phone-content {
+  padding: 16px;
+}
+
+.phone-map-bg {
+  width: 100%; height: 180px;
+  background: var(--paper2);
+  border-radius: 16px;
+  margin-bottom: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated map pins */
+.map-grid {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 24px, var(--rule) 24px, var(--rule) 25px),
+    repeating-linear-gradient(90deg, transparent, transparent 24px, var(--rule) 24px, var(--rule) 25px);
+}
+
+.pin {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.pin-dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  border: 2px solid var(--page);
+  box-shadow: 0 2px 6px rgba(46,92,62,0.4);
+}
+
+.pin-pulse {
+  position: absolute;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(46,92,62,0.2);
+  animation: pulse 2s ease infinite;
+}
+
+.pin-label {
+  background: var(--ink);
+  color: var(--page);
+  font-family: 'DM Mono', monospace;
+  font-size: 6px;
+  letter-spacing: 0.5px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.pin1 { top: 28%; left: 22%; animation: pinAppear 0.5s 1.5s both; }
+.pin2 { top: 48%; left: 55%; animation: pinAppear 0.5s 1.8s both; }
+.pin3 { top: 65%; left: 32%; animation: pinAppear 0.5s 2.1s both; }
+.pin4 { top: 30%; left: 68%; animation: pinAppear 0.5s 2s both; }
+
+.phone-compass {
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 32px; height: 32px;
+  opacity: 0.3;
+}
+
+.phone-events {
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.event-card {
+  background: white;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex; align-items: center; gap: 8px;
+  animation: slideIn 0.4s ease both;
+}
+
+.event-card:nth-child(1) { animation-delay: 2s; }
+.event-card:nth-child(2) { animation-delay: 2.2s; }
+.event-card:nth-child(3) { animation-delay: 2.4s; }
+
+.event-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.event-dot.green { background: var(--green); }
+.event-dot.sand  { background: var(--sand); }
+.event-dot.ink   { background: var(--ink2); }
+
+.event-info { flex: 1; min-width: 0; }
+
+.event-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 7px; letter-spacing: 0.3px;
+  color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.event-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 6px; color: var(--ink3);
+  margin-top: 1px;
+}
+
+.event-dist {
+  font-family: 'DM Mono', monospace;
+  font-size: 6px; color: var(--ink3);
+  flex-shrink: 0;
+}
+
+/* AR overlay hint */
+.ar-banner {
+  position: absolute;
+  top: 60px; left: 16px; right: 16px;
+  background: rgba(30,26,20,0.75);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  padding: 6px 10px;
+  display: flex; align-items: center; gap: 6px;
+  animation: fadeIn 0.5s 2.8s both;
+  z-index: 5;
+}
+
+.ar-dot {
+  width: 5px; height: 5px;
+  background: #4eff8a;
+  border-radius: 50%;
+  animation: blink 1.5s ease infinite;
+}
+
+.ar-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 7px; letter-spacing: 0.5px;
+  color: rgba(247,244,238,0.85);
+  text-transform: uppercase;
+}
+
+/* floating decoration */
+.float-card {
+  position: absolute;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 24px rgba(30,26,20,0.12);
+}
+
+.float-card.left {
+  left: -60px; top: 35%;
+  animation: float 4s ease-in-out infinite, fadeIn 0.8s 1.5s both;
+}
+
+.float-card.bottom {
+  right: -40px; bottom: 20%;
+  animation: float 3.5s 1s ease-in-out infinite, fadeIn 0.8s 1.8s both;
+}
+
+.float-label {
+  font-size: 8px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 4px;
+}
+
+.float-val {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-size: 15px; font-weight: 300;
+  color: var(--ink);
+}
+
+/* ── FEATURES ── */
+.features {
+  padding: 80px 48px 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid var(--border);
+}
+
+.features-label {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 60px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.features-label::before {
+  content: '';
+  display: block; width: 24px; height: 1px;
+  background: var(--sand);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.feature {
+  padding: 40px 36px;
+  background: var(--paper);
+  border-radius: 16px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: default;
+}
+
+.feature:hover {
+  background: var(--paper2);
+  transform: translateY(-2px);
+}
+
+.feature-num {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 11px;
+  color: var(--sand);
+  margin-bottom: 20px;
+}
+
+.feature-icon {
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.feature-title {
+  font-family: 'Spectral', serif;
+  font-weight: 400;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink3);
+}
+
+/* ── HOW IT WORKS ── */
+.how {
+  padding: 80px 48px 100px;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.how::before {
+  content: 'dwell';
+  position: absolute;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 320px;
+  color: rgba(255,255,255,0.02);
+  right: -40px; top: -40px;
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -10px;
+}
+
+.how-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.how-label {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(200,184,161,0.5); margin-bottom: 60px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.how-label::before {
+  content: '';
+  display: block; width: 24px; height: 1px;
+  background: rgba(200,184,161,0.3);
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.how-step {
+  display: flex; flex-direction: column; gap: 20px;
+  padding: 32px 0;
+  border-top: 1px solid rgba(200,184,161,0.12);
+}
+
+.step-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  color: rgba(200,184,161,0.4);
+  text-transform: uppercase;
+}
+
+.step-title {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--paper);
+}
+
+.step-desc {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(240,236,224,0.55);
+}
+
+/* ── WAITLIST SECTION ── */
+.waitlist-section {
+  padding: 100px 48px 120px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.waitlist-eyebrow {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 32px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+
+.waitlist-eyebrow::before,
+.waitlist-eyebrow::after {
+  content: '';
+  display: block; width: 32px; height: 1px;
+  background: var(--border);
+}
+
+.waitlist-title {
+  font-family: 'Spectral', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.waitlist-title em { color: var(--green); }
+
+.waitlist-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink2);
+  margin-bottom: 48px;
+}
+
+/* Airtable embed wrapper */
+.airtable-wrapper {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(30,26,20,0.08);
+}
+
+.airtable-wrapper iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 40px 48px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-mark {
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.footer-mark em { color: var(--green); }
+
+.footer-meta {
+  font-size: 9px; letter-spacing: 0.5px;
+  color: var(--ink3); text-align: right;
+  line-height: 1.8;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes pinAppear {
+  from { opacity: 0; transform: translateY(6px) scale(0.8); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 100px 24px 60px;
+    gap: 60px;
+    text-align: center;
+  }
+  .hero-eyebrow { justify-content: center; }
+  .hero-sub { margin: 0 auto 40px; }
+  .hero-stats { justify-content: center; }
+  .cta-group { align-items: center; }
+  .hero-right { display: none; }
+  .features { padding: 60px 24px 80px; }
+  .features-grid { grid-template-columns: 1fr; gap: 2px; }
+  .how { padding: 60px 24px 80px; }
+  .how-steps { grid-template-columns: 1fr; }
+  .waitlist-section { padding: 80px 24px 100px; }
+  footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  .footer-meta { text-align: center; }
+  .float-card { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-wordmark"><em>D</em>well</div>
+  <div class="nav-pill">Early Access 2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span>AR Event Discovery</span>
+    </div>
+    <h1>The city <em>reveals</em> itself to those who walk it</h1>
+    <p class="hero-sub">
+      Point your phone and discover what's happening around you — art openings, markets, live music, gatherings — surfaced in augmented reality as you move through your neighbourhood.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Layers</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Discovery</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">01</span>
+        <span class="stat-label">Pilot City</span>
+      </div>
+    </div>
+    <div class="cta-group">
+      <a href="#waitlist" class="cta-btn">
+        <span>Join the waitlist</span>
+        <span class="arrow">→</span>
+      </a>
+      <span class="cta-note">Limited early access · Apply now</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- floating context cards -->
+    <div class="float-card left">
+      <div class="float-label">Nearby now</div>
+      <div class="float-val">14 events</div>
+    </div>
+    <div class="float-card bottom">
+      <div class="float-label">Walking dist.</div>
+      <div class="float-val">8 min</div>
+    </div>
+
+    <!-- phone -->
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <!-- AR banner -->
+        <div class="ar-banner">
+          <div class="ar-dot"></div>
+          <div class="ar-text">AR mode active · 3 events nearby</div>
+        </div>
+
+        <div class="phone-content">
+          <!-- map area -->
+          <div class="phone-map-bg">
+            <div class="map-grid"></div>
+
+            <div class="pin pin1">
+              <div class="pin-pulse"></div>
+              <div class="pin-dot"></div>
+              <div class="pin-label">Jazz night</div>
+            </div>
+            <div class="pin pin2">
+              <div class="pin-pulse" style="animation-delay:0.7s"></div>
+              <div class="pin-dot" style="background:var(--sand)"></div>
+              <div class="pin-label">Market</div>
+            </div>
+            <div class="pin pin3">
+              <div class="pin-pulse" style="animation-delay:1.2s"></div>
+              <div class="pin-dot" style="background:var(--ink2)"></div>
+              <div class="pin-label">Gallery open</div>
+            </div>
+            <div class="pin pin4">
+              <div class="pin-pulse" style="animation-delay:0.4s"></div>
+              <div class="pin-dot"></div>
+              <div class="pin-label">Film screening</div>
+            </div>
+
+            <!-- compass icon -->
+            <svg class="phone-compass" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="14" stroke="var(--ink)" stroke-width="1.5"/>
+              <circle cx="16" cy="16" r="1" fill="var(--ink)"/>
+              <line x1="16" y1="4" x2="16" y2="12" stroke="var(--ink)" stroke-width="1.5"/>
+              <line x1="16" y1="20" x2="16" y2="28" stroke="var(--ink)" stroke-width="1"/>
+              <line x1="4" y1="16" x2="12" y2="16" stroke="var(--ink)" stroke-width="1"/>
+              <line x1="20" y1="16" x2="28" y2="16" stroke="var(--ink)" stroke-width="1"/>
+              <polygon points="16,6 14,14 16,12 18,14" fill="var(--ink)"/>
+            </svg>
+          </div>
+
+          <!-- event list -->
+          <div class="phone-events">
+            <div class="event-card">
+              <div class="event-dot green"></div>
+              <div class="event-info">
+                <div class="event-name">Jazz at The Everybody</div>
+                <div class="event-meta">Tonight · 8 pm · Free</div>
+              </div>
+              <div class="event-dist">180m</div>
+            </div>
+            <div class="event-card">
+              <div class="event-dot sand"></div>
+              <div class="event-info">
+                <div class="event-name">City Farmers Market</div>
+                <div class="event-meta">Sat · 9 am · Outdoor</div>
+              </div>
+              <div class="event-dist">0.4km</div>
+            </div>
+            <div class="event-card">
+              <div class="event-dot ink"></div>
+              <div class="event-info">
+                <div class="event-name">Tāmaki Open Studios</div>
+                <div class="event-meta">Sun · 11 am · Free</div>
+              </div>
+              <div class="event-dist">0.6km</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <div class="how-label">The experience</div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">Open & walk</div>
+        <div class="step-desc">Launch Dwell, enable AR mode, and hold up your phone. The city layers itself onto your view — events annotated in space, scaled by proximity.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">Tap to discover</div>
+        <div class="step-desc">Tap any pin for details: what's on, who's going, how far. One tap to save, one more to navigate. No feeds, no scroll, no algorithm.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">Add local knowledge</div>
+        <div class="step-desc">Know about a recurring open mike or a rooftop with a view? Add it. Verified residents become the editorial layer the map never had.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-eyebrow">Early access</div>
+  <h2 class="waitlist-title">Be the first to <em>explore</em></h2>
+  <p class="waitlist-sub">
+    Dwell is coming soon. Join the waitlist and be among the first to experience the city in a new way.
+  </p>
+  <div class="airtable-wrapper">
+    <iframe class="airtable-embed" src="https://airtable.com/embed/appCNorh0qhvtb6XE/pagA3UUdoRyU7WcRj/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: none;"></iframe>
+    <div style="text-align:center; padding: 14px 0 20px; border-top: 1px solid var(--border);">
+      <span style="font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--ink3);">Form not loading?</span>
+      <a href="https://airtable.com/appCNorh0qhvtb6XE/pagA3UUdoRyU7WcRj/form" target="_blank" rel="noopener" style="font-size:9px; letter-spacing:1px; text-transform:uppercase; color:var(--green); text-decoration:none; margin-left:8px;">Open directly →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-mark"><em>D</em>well</div>
+  <div class="footer-meta">
+    Azimuth Studio · 2026<br>
+    dwell.app
+  </div>
+</footer>
+
+</body>
+</html>
